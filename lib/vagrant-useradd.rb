@@ -1,5 +1,3 @@
-require "vagrant-useradd/version"
-
-module VagrantUseradd
-
-end
+require 'vagrant-useradd/version'
+require 'vagrant-useradd/config'
+require 'vagrant-useradd/plugin'

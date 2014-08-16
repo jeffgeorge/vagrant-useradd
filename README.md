@@ -25,7 +25,7 @@ Or install it yourself as:
     $ gem install vagrant-useradd
 
 ## @TODO
-[ ] Do everything.
+- [ ] Do everything.
 
 ## Contributing
 

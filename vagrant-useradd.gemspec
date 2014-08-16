@@ -5,7 +5,7 @@ require 'vagrant-useradd/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "vagrant-useradd"
-  spec.version       = VagrantUseradd::VERSION
+  spec.version       = VagrantPlugins::Useradd::VERSION
   spec.authors       = ["Jeff George"]
   spec.email         = ["jeff.george@gmail.com"]
   spec.summary       = %q{Inject users & groups into a Vagrant box prior to mounting synced_folders.}
