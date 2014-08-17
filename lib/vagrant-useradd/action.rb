@@ -1,5 +1,3 @@
-require "log4r"
-
 module VagrantPlugins
   module Useradd
     # Action to add users & groups
@@ -15,7 +13,6 @@ module VagrantPlugins
       def initialize(app, env)
         @app       = app
         @env       = env
-        @logger    = Log4r::Logger.new("vagrant::plugins::useradd::action")
       end
       
       # Call method of this middleware
@@ -24,15 +21,17 @@ module VagrantPlugins
       # @return nil
       #
       def call(env)
-        @logger.info("[vagrant-useradd] We're here!")
-        @logger.info("hook fired for action #{@env[:action_name]}, machine_action: #{@env[:machine_action]}")
-        # @app.call(env)
-        # if @env[:machine] && @env[:machine].state.id != :poweroff &&
-        #    ! @env[:machine].config.sh.after_share_folders.nil?
-        #   @env[:machine].action(:ssh_run, 
-        #                         ssh_run_command: @env[:machine].config.sh.after_share_folders,
-        #                         ssh_opts: {extra_args: []})
-        # end
+        # Figure out if we should even try adding stuff
+        if @env[:machine] && @env[:machine].state.id != :poweroff && !@env[:machine].config.useradd.users.nil?
+            @env[:machine].config.useradd.users.each do |user|
+              # Check to see if this user has already been added
+              if !@env[:machine].communicate.test("id #{user}")
+                @env[:ui].info "vagrant-useradd - Adding user '#{user}'..."
+                @env[:machine].communicate.sudo("useradd -M #{user}")
+              end
+            end 
+        end
+        @app.call(env)
       end
     end
   end

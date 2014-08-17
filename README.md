@@ -10,27 +10,37 @@ _Fair warning: This module is totally not ready for prime-time yet._
 
 ## Installation
 
-Add this line to your application's Gemfile:
+_Sorry, it's manual right now._
 
-```ruby
-gem 'vagrant-useradd'
+- Clone the repo.
+- Build it
+```
+$ rake build
+```
+- Install the gem as a vagrant plugin
+```
+$ vagrant plugin install pkg/vagrant-useradd*.gem
 ```
 
-And then execute:
+## Usage
 
-    $ bundle
+Right now this module just reads a single config variable in your Vagrantfile:
 
-Or install it yourself as:
+```
+config.useradd.users = ['apache','mysql']
+```
 
-    $ gem install vagrant-useradd
+That's it!
 
 ## @TODO
-- [ ] Do everything.
+- [x] Basic Functionality (adds users!)
+- [ ] Add Groups
+- [ ] Assign Groups
+- [ ] Comprehensive Docs
+- [ ] Publish to rubygems
 
 ## Contributing
 
-1. Fork it ( https://github.com/jeffgeorge/vagrant-useradd/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+1. Fork it
+2. Hack on a branch
+3. Send a Pull Request

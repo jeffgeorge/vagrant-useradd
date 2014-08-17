@@ -10,7 +10,7 @@ module VagrantPlugins
       end
       
       action_hook :useradd_hook do |hook|
-        hook.before(Vagrant::Action::Builtin::SyncedFolders, Action)
+        hook.after(Vagrant::Action::Builtin::WaitForCommunicator, Action)
       end
     end
   end
