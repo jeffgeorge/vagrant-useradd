@@ -9,6 +9,9 @@ module VagrantPlugins
         Config
       end
       
+      action_hook :useradd_hook do |hook|
+        hook.before(Vagrant::Action::Builtin::SyncedFolders, Action)
+      end
     end
   end
 end
