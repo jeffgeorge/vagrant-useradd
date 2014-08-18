@@ -34,15 +34,15 @@ module VagrantPlugins
               end
             end
             
+            group_list = groups.nil? ? nil : " -G " + groups.join(",")
+            
             # Check to see if this user has already been added
             if !@env[:machine].communicate.test("getent passwd #{user}")
-              group_list = groups.nil? ? nil : " -G " + groups.join(",")
               @env[:ui].info "vagrant-useradd - Adding user '#{user}'..."
               @env[:machine].communicate.sudo("useradd#{group_list} -M #{user}")
             else
               if !groups.nil?
-                group_list = groups.nil? ? nil : " -a " + groups.join(",")
-                @env[:ui].info "vagrant-useradd - Adding groups to user '#{user}'..."
+                @env[:ui].info "vagrant-useradd - Setting groups for user '#{user}'..."
                 @env[:machine].communicate.sudo("usermod#{group_list} #{user}")
               end
             end

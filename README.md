@@ -8,11 +8,13 @@ I've accomplished this in the past by mounting key data directories like Apache 
 
 However, if you could mount a data directory as Apache or MySQL most of these problems would conveniently disappear, but vboxfs mounts don't work if the guest doesn't already have the user or group present. So we need some way to forcibly inject users and groups before mounting. Thus, this module.
 
-_Fair warning: This module is totally not ready for prime-time yet._
-
 ## Installation
 
-_Sorry, it's manual right now._
+```
+$ vagrant plugin install vagrant-useradd
+```
+
+### Or pull it from source
 
 - Clone the repo.
 - Build it
@@ -39,19 +41,12 @@ If you need to define extra groups (like, Apache's 'www-data' group on Debian-ba
 ```
 config.useradd.users = {
   'apache' => ['www-data'],
-  'mysql' => [],
+  'mysql' => nil,
   'somebody-else' => ['one','or-more','groups']
 }
 ```
 
-Note that group additions are *additive* only. If you need to remove a group that's up to you to fix.
-
-## @TODO
-- [x] Basic Functionality (adds users!)
-- [x] Add Groups
-- [x] Assign Groups
-- [x] Comprehensive Docs _(Sort of...)_
-- [ ] Publish to rubygems
+Note that extra groups are being added *destructively*. So if a provisioning run happens and modifies one of these users, when you reload it's going to be forcibly reset to what you've specified.
 
 ## Contributing
 
