@@ -48,6 +48,10 @@ config.useradd.users = {
 
 Note that extra groups are being added *destructively*. So if a provisioning run happens and modifies one of these users, when you reload it's going to be forcibly reset to what you've specified.
 
+## In Action
+
+Want to see this plugin actually being used? I'm using it in my personal Vagrant config in my other public repo "[lamp-vagrant-maths](https://github.com/jeffgeorge/lamp-vagrant-maths)". [Here's a link](https://github.com/jeffgeorge/lamp-vagrant-maths/blob/v1.0.0/Vagrantfile#L26-L30) straight to where I set up the user array. Since the module injects users into the box I'm able to [mount as specific users](https://github.com/jeffgeorge/lamp-vagrant-maths/blob/v1.0.0/Vagrantfile#L35-L37) further down in the file.
+
 ## Contributing
 
 1. Fork it
